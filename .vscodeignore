@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+out/test/**
+src/**
+.gitignore
+**/tsconfig.json
+**/*.map
+**/*.ts
+**/webpack.config.js
+website
+docs
+.babelrc
+cypress

@@ -1,0 +1,10 @@
+.ProseMirror {
+    height: calc(95vh);
+    border: none;
+    margin: 10px;
+    padding: 5px;
+}
+
+.ProseMirror-focused {
+    border: none;
+}

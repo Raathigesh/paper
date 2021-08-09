@@ -1,0 +1,145 @@
+{
+    "name": "paper",
+    "displayName": "Paper",
+    "description": "Take code notes",
+    "publisher": "raathigeshan",
+    "version": "0.1.0",
+    "engines": {
+        "vscode": "^1.50.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Raathigesh/paper"
+    },
+    "icon": "icons/icon.png",
+    "galleryBanner": {
+        "color": "#111111",
+        "theme": "dark"
+    },
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension/extension",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "paper-view",
+                    "title": "Paper",
+                    "icon": "icons/icon.png"
+                }
+            ]
+        },
+        "views": {
+            "paper-view": [
+                {
+                    "type": "webview",
+                    "id": "paper",
+                    "name": "Paper"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "yarn run build",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./src/extension --project ./tsconfig.json",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "ui": "webpack-dev-server --env.development --config ./webpack.config.js",
+        "build-ui": "webpack --env.production --config ./webpack.config.js",
+        "build": "rimraf out && yarn compile && yarn build-ui",
+        "package-ext": "vsce package --yarn",
+        "publish-ext": "vsce publish --yarn",
+        "pretty": "prettier --write  \"src/**/*.{ts,tsx}\"",
+        "test": "jest",
+        "ship": "yarn version && git push origin --tag"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.2",
+        "@babel/plugin-proposal-class-properties": "^7.4.0",
+        "@babel/plugin-proposal-decorators": "^7.6.0",
+        "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+        "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+        "@babel/plugin-syntax-optional-chaining": "^7.2.0",
+        "@babel/plugin-transform-runtime": "^7.5.0",
+        "@babel/preset-env": "^7.4.3",
+        "@babel/preset-react": "^7.0.0",
+        "@babel/preset-typescript": "^7.7.2",
+        "@chakra-ui/react": "^1.6.5",
+        "@devtools-ds/dom-inspector": "^1.1.2",
+        "@devtools-ds/themes": "^1.1.2",
+        "@emotion/core": "^10.0.22",
+        "@emotion/react": "11",
+        "@emotion/styled": "11",
+        "@types/babel-traverse": "^6.25.5",
+        "@types/cors": "^2.8.12",
+        "@types/express": "^4.17.13",
+        "@types/jest": "^24.0.21",
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^10.12.21",
+        "@types/react": "^16.8.14",
+        "@types/react-dom": "^16.8.4",
+        "@types/react-resizable": "^1.7.2",
+        "@types/react-resize-detector": "^4.2.0",
+        "@types/react-router-dom": "^4.3.3",
+        "all-contributors-cli": "^6.17.0",
+        "babel-loader": "^8.0.5",
+        "babel-plugin-styled-components": "^1.10.0",
+        "concurrently": "^5.2.0",
+        "copy-to-clipboard": "^3.3.1",
+        "cross-env": "^5.2.0",
+        "css-loader": "^2.1.1",
+        "emotion-theming": "^10.0.19",
+        "file-loader": "^3.0.1",
+        "framer-motion": "4",
+        "html-webpack-plugin": "^3.2.0",
+        "html-webpack-template": "^6.2.0",
+        "husky": "^3.0.9",
+        "jest": "^24.9.0",
+        "prettier": "^1.19.1",
+        "pretty-quick": "^2.0.0",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-feather": "^1.1.6",
+        "rimraf": "^2.6.3",
+        "style-loader": "^0.23.1",
+        "terser-webpack-plugin": "^2.3.5",
+        "typescript": "^4.1.3",
+        "url-loader": "^3.0.0",
+        "vscode": "^1.1.28",
+        "vscode-test": "^1.4.0",
+        "wait-on": "^5.1.0",
+        "webpack": "^4.30.0",
+        "webpack-cli": "^3.3.1",
+        "webpack-dev-server": "^3.3.1"
+    },
+    "dependencies": {
+        "@tiptap/extension-link": "^2.0.0-beta.19",
+        "@tiptap/react": "^2.0.0-beta.55",
+        "@tiptap/starter-kit": "^2.0.0-beta.89",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "get-port": "^5.1.1",
+        "temp-dir": "^2.0.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "/node_modules/",
+            "/out/"
+        ],
+        "moduleNameMapper": {
+            "^common(.*)$": "<rootDir>/src/common$1",
+            "^entities(.*)$": "<rootDir>/src/entities$1",
+            "^indexer(.*)$": "<rootDir>/src/indexer$1"
+        }
+    }
+}

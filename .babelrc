@@ -1,0 +1,22 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-typescript",
+      {
+        "isTSX": true,
+        "allExtensions": true
+      }
+    ],
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "@babel/plugin-proposal-object-rest-spread",
+    "babel-plugin-styled-components",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-optional-chaining",
+    "@babel/plugin-proposal-optional-chaining"
+  ]
+}
