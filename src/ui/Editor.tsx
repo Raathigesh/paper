@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import symbolBookmark from './editor-views/symbol-bookmark';
+import treeView from './editor-views/file-tree';
 import './styles.css';
 import { Button } from '@chakra-ui/react';
-import { File } from 'react-feather';
+import { File, List } from 'react-feather';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
 
@@ -22,7 +23,7 @@ const Editor = () => {
     };
 
     const editor = useEditor({
-        extensions: [StarterKit, symbolBookmark],
+        extensions: [StarterKit, symbolBookmark, treeView],
         content: '',
         onUpdate: ({ editor }) => {
             updateContent(editor.getHTML());
@@ -52,6 +53,17 @@ const Editor = () => {
                         }}
                     >
                         <File size="10px" strokeWidth="1px" />
+                    </Button>
+                    <Button
+                        size="xs"
+                        backgroundColor="#5F5F78"
+                        color="#f1f0ee"
+                        onClick={() => {
+                            const focusResult = editor.chain().focus();
+                            (focusResult as any).toggleTreeView().run();
+                        }}
+                    >
+                        <List size="10px" strokeWidth="1px" />
                     </Button>
                 </FloatingMenu>
             )}

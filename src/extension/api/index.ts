@@ -2,9 +2,10 @@ import * as express from 'express';
 import * as vscode from 'vscode';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as dirTree from 'directory-tree';
 
 import { initializeStaticRoutes } from './static-files';
-import { join } from 'path';
+import { isAbsolute, join } from 'path';
 
 export async function startApiServer(
     port: number,
@@ -17,9 +18,11 @@ export async function startApiServer(
 
     app.post('/open-file', (req, res) => {
         const path = req.body.filePath;
-        vscode.window.showTextDocument(
-            vscode.Uri.file(join(vscode.workspace.rootPath || '', path))
-        );
+        const fullPath = isAbsolute(path)
+            ? path
+            : join(vscode.workspace.rootPath || '', path);
+
+        vscode.window.showTextDocument(vscode.Uri.file(fullPath));
 
         res.send('OK');
     });
@@ -33,6 +36,11 @@ export async function startApiServer(
         const content = req.body.content;
         context.workspaceState.update('paper-content', content);
         res.send('OK');
+    });
+
+    app.post('/tree', (req, res) => {
+        const tree = dirTree(req.body.directoryPath);
+        res.json(tree);
     });
 
     return new Promise((resolve, reject) => {
