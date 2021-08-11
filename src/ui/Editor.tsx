@@ -45,25 +45,25 @@ const Editor = () => {
                 <FloatingMenu editor={editor}>
                     <Button
                         size="xs"
-                        backgroundColor="#5F5F78"
+                        backgroundColor="#0088FF"
                         color="#f1f0ee"
                         onClick={() => {
                             const focusResult = editor.chain().focus();
                             (focusResult as any).toggleReactComponent().run();
                         }}
                     >
-                        <File size="10px" strokeWidth="1px" />
+                        <File size="13px" strokeWidth="2px" />
                     </Button>
                     <Button
                         size="xs"
-                        backgroundColor="#5F5F78"
+                        backgroundColor="#0088FF"
                         color="#f1f0ee"
                         onClick={() => {
                             const focusResult = editor.chain().focus();
                             (focusResult as any).toggleTreeView().run();
                         }}
                     >
-                        <List size="10px" strokeWidth="1px" />
+                        <List size="13px" strokeWidth="2px" />
                     </Button>
                 </FloatingMenu>
             )}

@@ -51,29 +51,39 @@ export default (props: any) => {
     };
 
     return (
-        <NodeViewWrapper className="bookmarkRenderer">
-            <Flex>
-                <Input
-                    onChange={e => setPath(e.target.value)}
-                    value={props.node.attrs.path}
-                    size="xs"
-                />
-                <Button
-                    colorScheme="blackAlpha"
-                    onClick={() => getTree(props.node.attrs.path)}
-                    size="xs"
-                >
-                    Fetch
-                </Button>
+        <NodeViewWrapper
+            className="bookmarkRenderer"
+            style={{ display: 'flex' }}
+        >
+            <Flex
+                flexDir="column"
+                border="1px solid #2F2E31"
+                borderRadius="3px"
+                padding="5px"
+                flexGrow={1}
+            >
+                <Flex alignItems="center">
+                    <Input
+                        onChange={e => setPath(e.target.value)}
+                        value={props.node.attrs.path}
+                        borderColor="#2F2E31"
+                    />
+                    <Button
+                        variant="ghost"
+                        onClick={() => getTree(props.node.attrs.path)}
+                    >
+                        Fetch
+                    </Button>
+                </Flex>
+                {data && (
+                    <Node
+                        {...data}
+                        onFileClick={path => {
+                            openFile(path);
+                        }}
+                    />
+                )}
             </Flex>
-            {data && (
-                <Node
-                    {...data}
-                    onFileClick={path => {
-                        openFile(path);
-                    }}
-                />
-            )}
         </NodeViewWrapper>
     );
 };

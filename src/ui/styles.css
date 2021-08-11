@@ -6,5 +6,5 @@
 }
 
 .ProseMirror-focused {
-    border: none;
+    outline: none;
 }

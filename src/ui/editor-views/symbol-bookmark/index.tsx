@@ -39,7 +39,7 @@ export default Node.create({
         return {
             toggleReactComponent: () => ({ chain }: any) => {
                 return chain()
-                    .insertContent('<bookmark path=""></bookmark>')
+                    .insertContent('<bookmark></bookmark>')
                     .run();
             },
         } as any;

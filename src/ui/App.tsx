@@ -15,12 +15,22 @@ const theme = {
         global: {
             'html, body': {
                 padding: '0px',
+                backgroundColor: '#1C1C1E',
+                color: 'white',
+                caretColor: 'white',
+                fontSize: '15px',
+            },
+            h1: {
+                fontSize: '25px',
+            },
+            ul: {
+                marginLeft: '15px',
+            },
+            li: {
+                marginLeft: '15px',
             },
             button: {
-                backgroundColor: 'gray',
                 margin: '3px',
-                padding: '3px',
-                borderRadius: '3px',
             },
         },
     },

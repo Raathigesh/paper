@@ -26,50 +26,50 @@ export default (props: any) => {
         });
     };
 
+    console.log(props.node.attrs);
+
     return (
         <NodeViewWrapper className="bookmarkRenderer">
             {!isInEdit && (
                 <Box
-                    backgroundColor="#5F5F78"
-                    color="#f1f0ee"
+                    color="#0088FF"
+                    fontWeight={600}
                     borderRadius="3px"
-                    fontSize="13px"
+                    fontSize="15px"
                     height="25px"
                     paddingLeft="5px"
                     paddingRight="2px"
                     cursor="pointer"
                     onClick={() => openFile(props.node.attrs.path)}
+                    wordBreak="break-all"
                 >
                     {props.node.attrs.path}
                     <IconButton
-                        variant="ghost"
                         padding="1px"
+                        variant="ghost"
                         onClick={() => setIsInEdit(true)}
-                        size="xs"
+                        size="sm"
                         aria-label="Edit icon"
                         icon={<Edit size="9px" />}
-                        _hover={{
-                            backgroundColor: '#5F5F78',
-                        }}
-                        height="16px"
                         width="10px"
                     />
                 </Box>
             )}
 
             {isInEdit && (
-                <Flex>
+                <Flex alignItems="center">
                     <Input
                         onChange={e => setPath(e.target.value)}
                         value={props.node.attrs.path}
                         onBlur={() => setIsInEdit(false)}
-                        size="xs"
+                        borderColor="#2F2E31"
+                        _focus={{ borderColor: '#2F2E31' }}
+                        size="sm"
                     />
                     <IconButton
+                        color="#0088FF"
                         onClick={() => setIsInEdit(false)}
-                        backgroundColor="#5F5F78"
-                        color="#f1f0ee"
-                        size="xs"
+                        size="sm"
                         padding="3px"
                         aria-label="Edit icon"
                         icon={<Check size="10px" />}

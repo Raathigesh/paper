@@ -37,7 +37,7 @@ export default Node.create({
         return {
             toggleTreeView: () => ({ chain }: any) => {
                 return chain()
-                    .insertContent('<treeview path=""></treeview>')
+                    .insertContent('<treeview></treeview>')
                     .run();
             },
         } as any;
