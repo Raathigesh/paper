@@ -22,7 +22,23 @@ export async function startApiServer(
             ? path
             : join(vscode.workspace.rootPath || '', path);
 
-        vscode.window.showTextDocument(vscode.Uri.file(fullPath));
+        let selection = undefined;
+        if (req.body.selection) {
+            selection = new vscode.Selection(
+                new vscode.Position(
+                    req.body.selection.start.line,
+                    req.body.selection.start.column
+                ),
+                new vscode.Position(
+                    req.body.selection.end.line,
+                    req.body.selection.end.column
+                )
+            );
+        }
+
+        vscode.window.showTextDocument(vscode.Uri.file(fullPath), {
+            selection,
+        });
 
         res.send('OK');
     });

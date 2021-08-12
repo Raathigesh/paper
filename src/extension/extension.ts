@@ -31,6 +31,23 @@ async function initialize(context: vscode.ExtensionContext) {
             provider
         )
     );
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('paper.copyRange', () => {
+            if (vscode.window.activeTextEditor?.selection.start) {
+                const selectionRange = new vscode.Range(
+                    vscode.window.activeTextEditor?.selection.start,
+                    vscode.window.activeTextEditor?.selection.end
+                );
+                const text = vscode.window.activeTextEditor?.document.getText(
+                    selectionRange
+                );
+
+                const fullTxt = `${text}|${vscode.window.activeTextEditor?.document.fileName}|${selectionRange.start.line}|${selectionRange.start.character}|${selectionRange.end.line}|${selectionRange.end.character}`;
+                vscode.env.clipboard.writeText(fullTxt);
+            }
+        })
+    );
 }
 
 class WaypointViewProvider implements vscode.WebviewViewProvider {

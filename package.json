@@ -24,6 +24,13 @@
     ],
     "main": "./out/extension/extension",
     "contributes": {
+        "commands": [
+            {
+                "command": "paper.copyRange",
+                "title": "Copy range",
+                "category": "paper"
+            }
+        ],
         "viewsContainers": {
             "activitybar": [
                 {
@@ -39,6 +46,13 @@
                     "type": "webview",
                     "id": "paper",
                     "name": "Paper"
+                }
+            ]
+        },
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "paper.copyRange"
                 }
             ]
         }
