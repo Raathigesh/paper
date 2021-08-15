@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
-import { Input, Box, IconButton, Flex } from '@chakra-ui/react';
+import {
+    Input,
+    Box,
+    IconButton,
+    Flex,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Button,
+} from '@chakra-ui/react';
 import { Edit, Check } from 'react-feather';
 import './styles.css';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
 
 export default (props: any) => {
-    const [isInEdit, setIsInEdit] = useState(false);
+    const [isInEdit, setIsInEdit] = useState(props.node.attrs.path === '');
     const setPath = (bookmark: string) => {
         props.updateAttributes({
             path: bookmark,
@@ -47,51 +59,85 @@ export default (props: any) => {
 
     return (
         <NodeViewWrapper className="bookmarkRenderer">
+            <Modal isOpen={isInEdit} onClose={() => setIsInEdit(false)}>
+                <ModalOverlay />
+                <ModalContent backgroundColor="#2F2E31">
+                    <ModalHeader fontSize="15px" fontWeight={400}>
+                        Add range bookmark
+                    </ModalHeader>
+                    <ModalBody>
+                        <Input
+                            onChange={e => setPath(e.target.value)}
+                            value={props.node.attrs.path}
+                            onBlur={() => setIsInEdit(false)}
+                            size="sm"
+                        />
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button
+                            colorScheme="blue"
+                            mr={3}
+                            onClick={() => {
+                                setIsInEdit(false);
+                                if (props.node.attrs.path === '') {
+                                    props.deleteNode();
+                                }
+                            }}
+                            backgroundColor="#2F2E31"
+                            color="#f1f0ee"
+                            _hover={{ backgroundColor: '#090909' }}
+                            size="sm"
+                            fontWeight={400}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={e => {
+                                e.stopPropagation();
+                                setIsInEdit(false);
+                            }}
+                            backgroundColor="#5E5CED"
+                            color="#f1f0ee"
+                            _hover={{ backgroundColor: '#5452f3' }}
+                            size="sm"
+                            fontWeight={400}
+                        >
+                            Add
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+
             {!isInEdit && (
-                <Box
-                    color="#0088FF"
-                    fontWeight={600}
+                <Flex
+                    display="inline-flex"
+                    backgroundColor="#FFD300"
                     borderRadius="3px"
-                    fontSize="15px"
-                    height="25px"
                     paddingLeft="5px"
-                    paddingRight="2px"
+                    fontSize="13px"
                     cursor="pointer"
+                    _hover={{ backgroundColor: '#eec600' }}
+                    minHeight="25px"
+                    alignItems="center"
                     onClick={() => openFile(path)}
-                    wordBreak="break-all"
+                    color="#090909"
                 >
-                    {name}
-
-                    <IconButton
-                        padding="1px"
-                        variant="ghost"
-                        onClick={() => setIsInEdit(true)}
-                        size="sm"
-                        aria-label="Edit icon"
-                        icon={<Edit size="9px" />}
-                        width="10px"
-                    />
-                </Box>
-            )}
-
-            {isInEdit && (
-                <Flex alignItems="center">
-                    <Input
-                        onChange={e => setPath(e.target.value)}
-                        value={props.node.attrs.path}
-                        onBlur={() => setIsInEdit(false)}
-                        borderColor="#2F2E31"
-                        _focus={{ borderColor: '#2F2E31' }}
-                        size="sm"
-                    />
-                    <IconButton
-                        color="#0088FF"
-                        onClick={() => setIsInEdit(false)}
-                        size="sm"
-                        padding="3px"
-                        aria-label="Edit icon"
-                        icon={<Check size="10px" />}
-                    />
+                    <Flex marginLeft="5px">{name}</Flex>
+                    <Flex
+                        _hover={{ backgroundColor: '#d3b000' }}
+                        padding="6px"
+                        borderRadius="0px 3px 3px 0px"
+                        onClick={e => {
+                            e.stopPropagation();
+                            setIsInEdit(true);
+                        }}
+                        marginLeft="5px"
+                        height="100%"
+                        alignItems="center"
+                    >
+                        <Edit size="12px" strokeWidth="2px" />
+                    </Flex>
                 </Flex>
             )}
         </NodeViewWrapper>

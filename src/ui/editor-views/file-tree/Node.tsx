@@ -31,7 +31,7 @@ export function Node({ name, type, path, onFileClick, children = [] }: Props) {
                 borderRadius="3px"
                 fontSize="14px"
                 _hover={{
-                    backgroundColor: '#2F2E31',
+                    backgroundColor: '#25252e',
                 }}
                 onClick={e => {
                     e.stopPropagation();
@@ -43,8 +43,10 @@ export function Node({ name, type, path, onFileClick, children = [] }: Props) {
                 }}
             >
                 <Box marginRight="3px">{ArrowIcon}</Box>
-                <Icon size="13px" />
-                <Box marginLeft="5px">{name}</Box>
+                <Icon size="13px" strokeWidth="1px" />
+                <Box marginLeft="3px" fontSize="13px">
+                    {name}
+                </Box>
             </Flex>
             {isExpanded &&
                 children.map(child => (
