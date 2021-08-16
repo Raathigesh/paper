@@ -11,11 +11,24 @@ import {
 import { Edit, Check, RefreshCw, Trash2 } from 'react-feather';
 import { Node } from './Node';
 import './styles.css';
+import listener from '../../EventsListener';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
 
 export default (props: any) => {
     const [data, setData] = useState(null);
+    const [selectedEditor, setSelectedEditor] = useState<string | null>(null);
+    const [collapsedNodes, setCollapsedNodes] = useState(
+        JSON.parse(props.node.attrs.collapsedNodes)
+    );
+
+    useEffect(() => {
+        const cb = (path: string) => {
+            setSelectedEditor(path);
+        };
+
+        listener.addListener(cb);
+    }, []);
 
     const getTree = async (path: string) => {
         const response = await fetch(`${API_URL}/tree`, {
@@ -41,6 +54,19 @@ export default (props: any) => {
             },
             body: JSON.stringify({
                 filePath: path,
+            }),
+        });
+    };
+
+    const setCollapsedNode = (path: string, value: boolean) => {
+        setCollapsedNodes({
+            ...collapsedNodes,
+            [path]: value,
+        });
+        props.updateAttributes({
+            collapsedNodes: JSON.stringify({
+                ...collapsedNodes,
+                [path]: value,
             }),
         });
     };
@@ -75,8 +101,8 @@ export default (props: any) => {
                         onChange={e => setPath(e.target.value)}
                         value={props.node.attrs.path}
                         borderColor="#2F2E31"
-                        size="sm"
-                        backgroundColor="#1C1C1E"
+                        size="xs"
+                        backgroundColor="#2F2E31"
                         _hover={{ border: '1px solid #1C1C1E' }}
                         borderRadius="4px"
                     />
@@ -112,14 +138,17 @@ export default (props: any) => {
                     marginLeft="-20px"
                     flexGrow={1}
                     flexDir="column"
-                    marginTop="10px"
+                    marginTop="5px"
                 >
                     {data && (
                         <Node
+                            selectedEditor={selectedEditor}
+                            collapsedNodes={collapsedNodes}
                             {...data}
                             onFileClick={path => {
                                 openFile(path);
                             }}
+                            onCollapse={setCollapsedNode}
                         />
                     )}
                 </Flex>

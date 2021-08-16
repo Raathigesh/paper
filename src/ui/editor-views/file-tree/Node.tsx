@@ -7,11 +7,24 @@ interface Props {
     type: 'file' | 'directory';
     path: string;
     children: Props[];
+    collapsedNodes: { [key: string]: boolean };
     onFileClick: (path: string) => void;
+    onCollapse: (path: string, value: boolean) => void;
+    selectedEditor: string | null;
 }
 
-export function Node({ name, type, path, onFileClick, children = [] }: Props) {
-    const [isExpanded, setIsExpanded] = useState(true);
+export function Node({
+    name,
+    type,
+    path,
+    onFileClick,
+    collapsedNodes,
+    onCollapse,
+    children = [],
+    selectedEditor,
+}: Props) {
+    const isExpanded =
+        collapsedNodes[path] === undefined ? true : collapsedNodes[path];
 
     const ArrowIcon =
         type === 'directory' ? (
@@ -33,12 +46,17 @@ export function Node({ name, type, path, onFileClick, children = [] }: Props) {
                 _hover={{
                     backgroundColor: '#25252e',
                 }}
+                backgroundColor={
+                    selectedEditor?.toLowerCase() === path.toLowerCase()
+                        ? '#25252e'
+                        : 'none'
+                }
                 onClick={e => {
                     e.stopPropagation();
                     if (type === 'file') {
                         onFileClick(path);
                     } else {
-                        setIsExpanded(!isExpanded);
+                        onCollapse(path, !isExpanded);
                     }
                 }}
             >
@@ -50,7 +68,13 @@ export function Node({ name, type, path, onFileClick, children = [] }: Props) {
             </Flex>
             {isExpanded &&
                 children.map(child => (
-                    <Node {...child} onFileClick={onFileClick} />
+                    <Node
+                        {...child}
+                        onFileClick={onFileClick}
+                        collapsedNodes={collapsedNodes}
+                        onCollapse={onCollapse}
+                        selectedEditor={selectedEditor}
+                    />
                 ))}
         </Flex>
     );

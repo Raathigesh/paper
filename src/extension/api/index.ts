@@ -59,6 +59,28 @@ export async function startApiServer(
         res.json(tree);
     });
 
+    app.get('/events', async function(req, res) {
+        res.set({
+            'Cache-Control': 'no-cache',
+            'Content-Type': 'text/event-stream',
+            Connection: 'keep-alive',
+        });
+        res.flushHeaders();
+
+        // Tell the client to retry every 10 seconds if connectivity is lost
+        res.write('retry: 10000\n\n');
+
+        vscode.window.onDidChangeActiveTextEditor(event => {
+            if (event) {
+                res.write(
+                    `data: ${JSON.stringify({
+                        activeEditor: event?.document.fileName,
+                    })}\n\n`
+                );
+            }
+        });
+    });
+
     return new Promise((resolve, reject) => {
         app.listen(port, () => {
             const url = `http://localhost:${port}`;

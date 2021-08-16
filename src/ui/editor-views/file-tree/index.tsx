@@ -14,6 +14,9 @@ export default Node.create({
             path: {
                 default: '',
             },
+            collapsedNodes: {
+                default: '{}',
+            },
         };
     },
 

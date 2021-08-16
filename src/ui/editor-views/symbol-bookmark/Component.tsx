@@ -92,7 +92,7 @@ export default (props: any) => {
             </Modal>
             <Flex
                 display="inline-flex"
-                backgroundColor="#5E5CED"
+                backgroundColor="#2a28b5"
                 borderRadius="3px"
                 paddingLeft="5px"
                 fontSize="13px"
