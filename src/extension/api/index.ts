@@ -6,11 +6,14 @@ import * as dirTree from 'directory-tree';
 
 import { initializeStaticRoutes } from './static-files';
 import { isAbsolute, join } from 'path';
+import { DocsManager } from './DocsManager';
 
 export async function startApiServer(
     port: number,
     context: vscode.ExtensionContext
 ) {
+    const docsManager = new DocsManager(context);
+
     const app = express();
     app.use(bodyParser());
     app.use(cors());
@@ -35,22 +38,46 @@ export async function startApiServer(
                 )
             );
         }
-
         vscode.window.showTextDocument(vscode.Uri.file(fullPath), {
             selection,
         });
-
         res.send('OK');
     });
 
+    app.post('/create', (req, res) => {
+        const name = req.body.name;
+        const type = req.body.type;
+
+        docsManager.createDocument(name, '', type);
+        const documents = docsManager.getDocumentsList();
+        res.json(documents);
+    });
+
     app.get('/content', (req, res) => {
-        const content = context.workspaceState.get('paper-content');
-        res.send(content);
+        const document = docsManager.getActiveDocument();
+        res.json(document);
     });
 
     app.post('/content', (req, res) => {
         const content = req.body.content;
-        context.workspaceState.update('paper-content', content);
+        const id = req.body.id;
+
+        if (!id) {
+            res.sendStatus(500);
+        } else {
+            docsManager.updateDocument(id, content);
+            res.send('OK');
+        }
+    });
+
+    app.get('/documents', (req, res) => {
+        const documents = docsManager.getDocumentsList();
+        res.json(documents);
+    });
+
+    app.post('/changeActiveDocument', (req, res) => {
+        const id = req.body.id;
+        docsManager.setActiveDocument(id);
         res.send('OK');
     });
 

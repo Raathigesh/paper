@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import symbolBookmark from './editor-views/symbol-bookmark';
@@ -11,19 +11,12 @@ import { File, List, MousePointer, Map } from 'react-feather';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
 
-const Editor = () => {
-    const updateContent = async (content: string) => {
-        fetch(`${API_URL}/content`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                content,
-            }),
-        });
-    };
+interface Props {
+    content: string;
+    onChange: (content: string) => void;
+}
 
+const Editor = ({ content, onChange }: Props) => {
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -33,19 +26,21 @@ const Editor = () => {
             mindmap,
         ],
         content: '',
-        onUpdate: ({ editor }) => {
-            updateContent(editor.getHTML());
-        },
     });
 
     useEffect(() => {
-        async function getContent() {
-            const content = await (await fetch(`${API_URL}/content`)).text();
-            editor?.commands.setContent(content);
-        }
+        const handler = ({ editor }: any) => {
+            onChange(editor.getHTML());
+        };
+        editor?.on('update', handler);
+        return () => {
+            editor?.off('update', handler);
+        };
+    }, [editor, onChange]);
 
-        getContent();
-    }, [editor]);
+    useEffect(() => {
+        editor?.commands.setContent(content);
+    }, [content, editor]);
 
     return (
         <>
