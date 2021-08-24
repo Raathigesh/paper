@@ -108,6 +108,34 @@ export async function startApiServer(
         });
     });
 
+    // View specific endpoints
+    app.get('/activeFilePath', (req, res) => {
+        res.json({
+            activeFilePath: vscode.window.activeTextEditor?.document.fileName,
+        });
+    });
+
+    app.get('/getSelection', (req, res) => {
+        if (vscode.window.activeTextEditor?.selection.start) {
+            const selectionRange = new vscode.Range(
+                vscode.window.activeTextEditor?.selection.start,
+                vscode.window.activeTextEditor?.selection.end
+            );
+            const text = vscode.window.activeTextEditor?.document.getText(
+                selectionRange
+            );
+
+            const fullTxt = `${text}|${vscode.window.activeTextEditor?.document.fileName}|${selectionRange.start.line}|${selectionRange.start.character}|${selectionRange.end.line}|${selectionRange.end.character}`;
+            res.json({
+                selection: fullTxt,
+            });
+        }
+
+        res.json({
+            selection: null,
+        });
+    });
+
     return new Promise((resolve, reject) => {
         app.listen(port, () => {
             const url = `http://localhost:${port}`;

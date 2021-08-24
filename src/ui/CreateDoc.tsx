@@ -19,10 +19,14 @@ import { ClientDoc } from './types';
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
 
 interface Props {
+    activeDoc: ClientDoc | null;
     onActiveDocumentChange: () => void;
 }
 
-export default function CreateDoc({ onActiveDocumentChange }: Props) {
+export default function CreateDoc({
+    activeDoc,
+    onActiveDocumentChange,
+}: Props) {
     const [docs, setDocs] = useState<ClientDoc[]>([]);
     const [docName, setDocName] = useState('');
 
@@ -46,10 +50,6 @@ export default function CreateDoc({ onActiveDocumentChange }: Props) {
         onActiveDocumentChange();
     };
 
-    useEffect(() => {
-        getDocs();
-    }, []);
-
     const createDoc = async (name: string) => {
         const response = await fetch(`${API_URL}/create`, {
             method: 'POST',
@@ -66,7 +66,7 @@ export default function CreateDoc({ onActiveDocumentChange }: Props) {
     };
 
     return (
-        <Popover colorScheme="blackAlpha">
+        <Popover colorScheme="blackAlpha" onOpen={() => getDocs()}>
             <PopoverTrigger>
                 <Button
                     size="sm"
@@ -90,6 +90,13 @@ export default function CreateDoc({ onActiveDocumentChange }: Props) {
                     <PopoverBody>
                         {docs.map(item => (
                             <Flex
+                                backgroundColor={
+                                    activeDoc
+                                        ? activeDoc.id === item.id
+                                            ? '#090909'
+                                            : ''
+                                        : ''
+                                }
                                 _hover={{
                                     backgroundColor: '#090909',
                                 }}

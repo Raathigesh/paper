@@ -82,6 +82,7 @@ function App() {
                 <Flex flexDir="column">
                     <Flex justifyContent="flex-end">
                         <CreateDoc
+                            activeDoc={activeDoc}
                             onActiveDocumentChange={() => {
                                 getContent();
                             }}

@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import symbolBookmark from './editor-views/symbol-bookmark';
+import fileBookmark from './editor-views/file-bookmark';
 import treeView from './editor-views/file-tree';
-import rangeBookmark from './editor-views/range-bookmark';
+import selectionBookmark from './editor-views/selection-bookmark';
 import mindmap from './editor-views/mind-map';
 import './styles.css';
 import { Button, Flex, Tooltip } from '@chakra-ui/react';
-import { File, List, MousePointer, Map } from 'react-feather';
+import { File, List, MousePointer, Map, Folder } from 'react-feather';
+import { EditorFloatingButton } from './EditorFloatingButton';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
 
@@ -20,9 +21,9 @@ const Editor = ({ content, onChange }: Props) => {
     const editor = useEditor({
         extensions: [
             StarterKit,
-            symbolBookmark,
+            fileBookmark,
             treeView,
-            rangeBookmark,
+            selectionBookmark,
             mindmap,
         ],
         content: '',
@@ -46,65 +47,45 @@ const Editor = ({ content, onChange }: Props) => {
         <>
             {editor && (
                 <FloatingMenu editor={editor}>
-                    <Flex backgroundColor="#2F2E31" borderRadius="4px">
-                        <Tooltip label="Bookmark a file">
-                            <Button
-                                size="xs"
-                                backgroundColor="#2F2E31"
-                                color="#f1f0ee"
-                                _hover={{ backgroundColor: '#090909' }}
-                                onClick={() => {
-                                    const focusResult = editor.chain().focus();
-                                    (focusResult as any)
-                                        .toggleReactComponent()
-                                        .run();
-                                }}
-                            >
-                                <File size="13px" strokeWidth="2px" />
-                            </Button>
-                        </Tooltip>
-                        <Tooltip label="Embed a file tree">
-                            <Button
-                                size="xs"
-                                backgroundColor="#2F2E31"
-                                color="#f1f0ee"
-                                _hover={{ backgroundColor: '#090909' }}
-                                onClick={() => {
-                                    const focusResult = editor.chain().focus();
-                                    (focusResult as any).toggleTreeView().run();
-                                }}
-                            >
-                                <List size="13px" strokeWidth="2px" />
-                            </Button>
-                        </Tooltip>
-                        <Tooltip label="Bookmark a range">
-                            <Button
-                                size="xs"
-                                backgroundColor="#2F2E31"
-                                color="#f1f0ee"
-                                _hover={{ backgroundColor: '#090909' }}
-                                onClick={() => {
-                                    const focusResult = editor.chain().focus();
-                                    (focusResult as any).toggleRange().run();
-                                }}
-                            >
+                    <Flex
+                        backgroundColor="#2F2E31"
+                        borderRadius="4px"
+                        boxShadow="0px 1px 0px 0px #3a3a3a"
+                    >
+                        <EditorFloatingButton
+                            tooltip="Bookmark active file"
+                            onClick={() => {
+                                const focusResult = editor.chain().focus();
+                                (focusResult as any)
+                                    .toggleReactComponent()
+                                    .run();
+                            }}
+                            icon={<File size="13px" strokeWidth="2px" />}
+                        />
+                        <Flex
+                            borderLeft="1px solid #1c1c1d"
+                            marginTop="2px"
+                            marginBottom="2px"
+                        />
+                        <EditorFloatingButton
+                            tooltip="Bookmark current selection"
+                            onClick={() => {
+                                const focusResult = editor.chain().focus();
+                                (focusResult as any).toggleRange().run();
+                            }}
+                            icon={
                                 <MousePointer size="13px" strokeWidth="2px" />
-                            </Button>
-                        </Tooltip>
-                        <Tooltip label="Mind map">
-                            <Button
-                                size="xs"
-                                backgroundColor="#2F2E31"
-                                color="#f1f0ee"
-                                _hover={{ backgroundColor: '#090909' }}
-                                onClick={() => {
-                                    const focusResult = editor.chain().focus();
-                                    (focusResult as any).toggleMindmap().run();
-                                }}
-                            >
-                                <Map size="13px" strokeWidth="2px" />
-                            </Button>
-                        </Tooltip>
+                            }
+                        />
+                        <Flex borderLeft="1px solid #1c1c1d" />
+                        <EditorFloatingButton
+                            tooltip="Embed a file tree"
+                            onClick={() => {
+                                const focusResult = editor.chain().focus();
+                                (focusResult as any).toggleTreeView().run();
+                            }}
+                            icon={<Folder size="13px" strokeWidth="2px" />}
+                        />
                     </Flex>
                 </FloatingMenu>
             )}
