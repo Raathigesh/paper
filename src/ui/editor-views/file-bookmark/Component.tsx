@@ -1,20 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
-import {
-    Input,
-    Box,
-    IconButton,
-    Flex,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalCloseButton,
-    ModalBody,
-    ModalFooter,
-    Button,
-} from '@chakra-ui/react';
-import { Edit, Check, Edit2, Trash } from 'react-feather';
+import { Flex, Tooltip } from '@chakra-ui/react';
+import { Trash } from 'react-feather';
 import './styles.css';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
@@ -56,21 +43,23 @@ export default (props: any) => {
         <NodeViewWrapper className="bookmarkRenderer">
             <Flex
                 display="inline-flex"
-                backgroundColor="#0087FF"
-                borderRadius="3px"
-                paddingLeft="5px"
-                fontSize="13px"
+                backgroundColor="#090909"
+                color="#03a9f4"
+                borderRadius="4px"
+                fontSize="14px"
                 cursor="pointer"
-                _hover={{ backgroundColor: '#0074da' }}
+                _hover={{ backgroundColor: '#272727' }}
                 minHeight="25px"
                 alignItems="center"
                 onClick={() => openFile(props.node.attrs.path)}
             >
-                <Flex marginLeft="5px">{props.node.attrs.path}</Flex>
+                <Flex marginLeft="5px" padding="2px" alignItems="center">
+                    {props.node.attrs.path}
+                </Flex>
                 <Flex
-                    _hover={{ backgroundColor: '#0074da' }}
-                    padding="6px"
-                    borderRadius="0px 3px 3px 0px"
+                    _hover={{ backgroundColor: '#03a9f4', color: '#090909' }}
+                    padding="7px"
+                    borderRadius="0px 4px 4px 0px"
                     onClick={e => {
                         e.stopPropagation();
                         props.deleteNode();
@@ -79,7 +68,9 @@ export default (props: any) => {
                     height="100%"
                     alignItems="center"
                 >
-                    <Trash size="12px" strokeWidth="2px" />
+                    <Tooltip label="Delete">
+                        <Trash size="12px" strokeWidth="2px" />
+                    </Tooltip>
                 </Flex>
             </Flex>
         </NodeViewWrapper>

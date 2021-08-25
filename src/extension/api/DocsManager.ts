@@ -97,6 +97,8 @@ export class DocsManager {
         const state: State = this.context.workspaceState.get(StateKey) as any;
         const nextState: State = {
             ...state,
+            activeDocument:
+                id === state.activeDocument ? null : state.activeDocument,
             documents: state.documents.filter(item => item.id !== id),
         };
         this.context.workspaceState.update(StateKey, nextState);
@@ -105,5 +107,24 @@ export class DocsManager {
     getDocumentsList(): Document[] {
         const state: State = this.context.workspaceState.get(StateKey) as any;
         return state.documents;
+    }
+
+    renameDoc(id: string, name: string) {
+        const state: State = this.context.workspaceState.get(StateKey) as any;
+        const updatedDocuments = state.documents.map(item => {
+            if (item.id === id) {
+                return {
+                    ...item,
+                    name,
+                };
+            }
+            return item;
+        });
+
+        const nextState: State = {
+            ...state,
+            documents: updatedDocuments,
+        };
+        this.context.workspaceState.update(StateKey, nextState);
     }
 }

@@ -74,19 +74,21 @@ export default (props: any) => {
         <NodeViewWrapper className="bookmarkRenderer">
             <Flex
                 display="inline-flex"
-                backgroundColor="#0087FF"
-                borderRadius="3px"
-                paddingLeft="5px"
-                fontSize="13px"
+                backgroundColor="#090909"
+                color="#03a9f4"
+                borderRadius="5px"
+                fontSize="14px"
                 cursor="pointer"
-                _hover={{ backgroundColor: '#0074da' }}
+                _hover={{ backgroundColor: '#272727' }}
                 minHeight="25px"
                 alignItems="center"
                 onClick={() => openFile(path)}
             >
-                <Flex marginLeft="5px">{name}</Flex>
+                <Flex padding="2px" marginLeft="5px">
+                    {name}
+                </Flex>
                 <Flex
-                    _hover={{ backgroundColor: '#0074da' }}
+                    _hover={{ backgroundColor: '#03a9f4', color: '#090909' }}
                     padding="6px"
                     borderRadius="0px 3px 3px 0px"
                     onClick={e => {

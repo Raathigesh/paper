@@ -47,11 +47,7 @@ const Editor = ({ content, onChange }: Props) => {
         <>
             {editor && (
                 <FloatingMenu editor={editor}>
-                    <Flex
-                        backgroundColor="#2F2E31"
-                        borderRadius="4px"
-                        boxShadow="0px 1px 0px 0px #3a3a3a"
-                    >
+                    <Flex backgroundColor="#2F2E31" borderRadius="4px">
                         <EditorFloatingButton
                             tooltip="Bookmark active file"
                             onClick={() => {

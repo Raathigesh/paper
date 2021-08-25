@@ -9,7 +9,7 @@ import { ThemeProvider } from '@devtools-ds/themes';
 import { Grid } from 'react-feather';
 import Editor from './Editor';
 import { ClientDoc } from './types';
-import CreateDoc from './CreateDoc';
+import CreateDoc from './docs-list';
 
 const theme = {
     ...defaultTheme,
@@ -24,6 +24,19 @@ const theme = {
             },
             h1: {
                 fontSize: '25px',
+                fontWeight: 300,
+            },
+            h2: {
+                fontSize: '20px',
+                fontWeight: 300,
+            },
+            h3: {
+                fontSize: '18px',
+                fontWeight: 300,
+            },
+            h4: {
+                fontSize: '15px',
+                fontWeight: 300,
             },
             ul: {
                 marginLeft: '15px',
@@ -33,6 +46,9 @@ const theme = {
             },
             button: {
                 margin: '3px',
+            },
+            ':focus': {
+                outline: 'none',
             },
         },
     },
@@ -80,7 +96,15 @@ function App() {
                 <GlobalStyle />
 
                 <Flex flexDir="column">
-                    <Flex justifyContent="flex-end">
+                    <Flex
+                        justifyContent="space-between"
+                        alignItems="center"
+                        backgroundColor="#090909"
+                        padding="3px"
+                    >
+                        <Flex marginLeft="15px">
+                            {activeDoc && activeDoc.name}
+                        </Flex>
                         <CreateDoc
                             activeDoc={activeDoc}
                             onActiveDocumentChange={() => {

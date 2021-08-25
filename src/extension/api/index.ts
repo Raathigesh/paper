@@ -81,6 +81,21 @@ export async function startApiServer(
         res.send('OK');
     });
 
+    app.post('/renameDocument', (req, res) => {
+        const id = req.body.id;
+        const newName = req.body.newName;
+
+        docsManager.renameDoc(id, newName);
+        res.send('OK');
+    });
+
+    app.post('/deleteDocument', (req, res) => {
+        const id = req.body.id;
+        docsManager.deleteDocument(id);
+
+        res.send('OK');
+    });
+
     app.post('/tree', (req, res) => {
         const tree = dirTree(req.body.directoryPath);
         res.json(tree);
