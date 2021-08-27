@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import fileBookmark from './editor-views/file-bookmark';
 import treeView from './editor-views/file-tree';
 import selectionBookmark from './editor-views/selection-bookmark';
 import './styles.css';
-import { Button, Flex, Tooltip } from '@chakra-ui/react';
-import { File, List, MousePointer, Map, Folder } from 'react-feather';
+import { Flex } from '@chakra-ui/react';
+import { File, MousePointer, Folder } from 'react-feather';
 import { EditorFloatingButton } from './EditorFloatingButton';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
@@ -52,7 +52,7 @@ const Editor = ({ content, onChange }: Props) => {
                             icon={<File size="13px" strokeWidth="2px" />}
                         />
                         <Flex
-                            borderLeft="1px solid #1c1c1d"
+                            borderLeft="1px solid brand.100"
                             marginTop="2px"
                             marginBottom="2px"
                         />
@@ -66,7 +66,7 @@ const Editor = ({ content, onChange }: Props) => {
                                 <MousePointer size="13px" strokeWidth="2px" />
                             }
                         />
-                        <Flex borderLeft="1px solid #1c1c1d" />
+                        <Flex borderLeft="1px solid brand.100" />
                         <EditorFloatingButton
                             tooltip="Embed a file tree"
                             onClick={() => {

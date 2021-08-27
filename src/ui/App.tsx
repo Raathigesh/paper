@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Grid } from 'react-feather';
 import Editor from './Editor';
 import { ClientDoc } from './types';
-import CreateDoc from './docs-list';
+import DocList from './docs-list';
 import { theme } from './theme';
 
 const API_URL = `http://localhost:${(window as any).port || '4545'}`;
@@ -56,7 +56,7 @@ function App() {
                     <Flex marginLeft="15px" fontSize="12px">
                         {activeDoc && activeDoc.name}
                     </Flex>
-                    <CreateDoc
+                    <DocList
                         activeDoc={activeDoc}
                         onActiveDocumentChange={() => {
                             getContent();
@@ -64,11 +64,20 @@ function App() {
                     />
                 </Flex>
 
-                {activeDoc && (
-                    <Editor
-                        content={activeDoc?.content}
-                        onChange={updateContent}
-                    />
+                <Editor
+                    content={activeDoc?.content || ''}
+                    onChange={updateContent}
+                />
+
+                {!activeDoc && (
+                    <Flex
+                        alignItems="center"
+                        justifyContent="center"
+                        marginTop="200px"
+                        color="brand.600"
+                    >
+                        No notes found. Create a note to begin.
+                    </Flex>
                 )}
             </Flex>
         </ChakraProvider>

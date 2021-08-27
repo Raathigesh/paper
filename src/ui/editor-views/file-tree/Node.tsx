@@ -44,11 +44,11 @@ export function Node({
                 borderRadius="3px"
                 fontSize="14px"
                 _hover={{
-                    backgroundColor: '#25252e',
+                    backgroundColor: 'brand.700',
                 }}
                 backgroundColor={
                     selectedEditor?.toLowerCase() === path.toLowerCase()
-                        ? '#25252e'
+                        ? 'brand.700'
                         : 'none'
                 }
                 onClick={e => {

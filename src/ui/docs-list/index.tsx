@@ -62,8 +62,9 @@ export default function CreateDoc({
                 type: 'doc',
             }),
         });
-        const documents = await response.json();
+        const { documents, id } = await response.json();
         setDocs(documents);
+        changeActiveDocument(id);
     };
 
     const renameDocument = async (id: string, newName: string) => {
@@ -134,6 +135,7 @@ export default function CreateDoc({
                     <PopoverBody>
                         {docs.map(item => (
                             <DocItem
+                                key={item.id}
                                 doc={item}
                                 isActive={
                                     !!activeDoc && activeDoc.id === item.id
@@ -145,6 +147,9 @@ export default function CreateDoc({
                                 onRename={renameDocument}
                             />
                         ))}
+                        {docs.length === 0 && (
+                            <Flex fontSize="13px">No documents found</Flex>
+                        )}
                     </PopoverBody>
                     <PopoverFooter borderColor="brand.100">
                         <Flex>

@@ -1,4 +1,4 @@
-import { Flex, Input, useTheme } from '@chakra-ui/react';
+import { Flex, Input, Tooltip, useTheme } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Edit, Check, Trash } from 'react-feather';
 import { ClientDoc } from '../types';
@@ -15,11 +15,9 @@ export function DocItem({ isActive, onClick, doc, onRename, onDelete }: Props) {
     const [isEditMode, setIsEditMode] = useState(false);
     const [docName, setDocName] = useState(doc.name);
 
-    const theme = useTheme();
-
     return (
         <Flex
-            backgroundColor={isActive ? theme.colors.brand[100] : 'brand.200'}
+            backgroundColor={isActive ? 'brand.100' : 'brand.200'}
             fontSize="13px"
             _hover={{
                 backgroundColor: 'brand.100',
@@ -30,6 +28,7 @@ export function DocItem({ isActive, onClick, doc, onRename, onDelete }: Props) {
             onClick={() => {
                 onClick();
             }}
+            height="30px"
             marginBottom="3px"
         >
             <Flex width="100%">
@@ -76,14 +75,29 @@ export function DocItem({ isActive, onClick, doc, onRename, onDelete }: Props) {
                             >
                                 <Edit strokeWidth="1.5px" size="15px" />
                             </Flex>
+
                             <Flex
                                 marginRight="5px"
-                                onClick={() => onDelete(doc.id)}
+                                onClick={e => {
+                                    if (!isActive) {
+                                        onDelete(doc.id);
+                                    }
+                                    e.stopPropagation();
+                                }}
+                                cursor={isActive ? 'not-allowed' : 'pointer'}
                                 _hover={{
-                                    color: 'brand.400',
+                                    color: isActive ? 'none' : 'brand.400',
                                 }}
                             >
-                                <Trash strokeWidth="1.5px" size="15px" />
+                                <Tooltip
+                                    label={
+                                        isActive
+                                            ? "Can't delete active note"
+                                            : 'Delete note'
+                                    }
+                                >
+                                    <Trash strokeWidth="1.5px" size="15px" />
+                                </Tooltip>
                             </Flex>
                         </Flex>
                     </Flex>

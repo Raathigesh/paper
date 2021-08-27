@@ -48,9 +48,12 @@ export async function startApiServer(
         const name = req.body.name;
         const type = req.body.type;
 
-        docsManager.createDocument(name, '', type);
+        const id = docsManager.createDocument(name, '', type);
         const documents = docsManager.getDocumentsList();
-        res.json(documents);
+        res.json({
+            id,
+            documents,
+        });
     });
 
     app.get('/content', (req, res) => {

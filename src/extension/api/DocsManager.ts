@@ -21,7 +21,7 @@ export class DocsManager {
         this.context = context;
     }
 
-    getActiveDocument(): Document {
+    getActiveDocument(): Document | null {
         if (this.context.workspaceState.get(StateKey) === undefined) {
             const newDocId = new Date().valueOf().toString();
             this.context.workspaceState.update(StateKey, {
@@ -44,7 +44,7 @@ export class DocsManager {
             item => item.id === state.activeDocument
         );
         if (!activeDocument) {
-            throw new Error('Active document not found.');
+            return null;
         }
         return activeDocument;
     }
@@ -78,12 +78,13 @@ export class DocsManager {
 
     createDocument(name: string, content: string, type: 'doc') {
         const state: State = this.context.workspaceState.get(StateKey) as any;
+        const id = new Date().valueOf().toString();
         const nextState: State = {
             ...state,
             documents: [
                 ...state.documents,
                 {
-                    id: new Date().valueOf().toString(),
+                    id,
                     content,
                     type,
                     name,
@@ -91,6 +92,8 @@ export class DocsManager {
             ],
         };
         this.context.workspaceState.update(StateKey, nextState);
+
+        return id;
     }
 
     deleteDocument(id: string) {
