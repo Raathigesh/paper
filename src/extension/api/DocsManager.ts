@@ -5,7 +5,7 @@ const StateKey = 'paper-documents';
 interface Document {
     content: string;
     id: string;
-    type: 'doc' | 'mindmap';
+    type: 'doc';
     name: string;
 }
 
@@ -76,7 +76,7 @@ export class DocsManager {
         this.context.workspaceState.update(StateKey, nextState);
     }
 
-    createDocument(name: string, content: string, type: 'doc' | 'mindmap') {
+    createDocument(name: string, content: string, type: 'doc') {
         const state: State = this.context.workspaceState.get(StateKey) as any;
         const nextState: State = {
             ...state,

@@ -4,7 +4,6 @@ import StarterKit from '@tiptap/starter-kit';
 import fileBookmark from './editor-views/file-bookmark';
 import treeView from './editor-views/file-tree';
 import selectionBookmark from './editor-views/selection-bookmark';
-import mindmap from './editor-views/mind-map';
 import './styles.css';
 import { Button, Flex, Tooltip } from '@chakra-ui/react';
 import { File, List, MousePointer, Map, Folder } from 'react-feather';
@@ -19,13 +18,7 @@ interface Props {
 
 const Editor = ({ content, onChange }: Props) => {
     const editor = useEditor({
-        extensions: [
-            StarterKit,
-            fileBookmark,
-            treeView,
-            selectionBookmark,
-            mindmap,
-        ],
+        extensions: [StarterKit, fileBookmark, treeView, selectionBookmark],
         content: '',
     });
 

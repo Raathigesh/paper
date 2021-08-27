@@ -24,13 +24,6 @@
     ],
     "main": "./out/extension/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "paper.copyRange",
-                "title": "Copy range",
-                "category": "paper"
-            }
-        ],
         "viewsContainers": {
             "activitybar": [
                 {
@@ -46,13 +39,6 @@
                     "type": "webview",
                     "id": "paper",
                     "name": "Paper"
-                }
-            ]
-        },
-        "menus": {
-            "editor/context": [
-                {
-                    "command": "paper.copyRange"
                 }
             ]
         }
@@ -87,6 +73,9 @@
         "@emotion/core": "^10.0.22",
         "@emotion/react": "11",
         "@emotion/styled": "11",
+        "@tiptap/extension-link": "^2.0.0-beta.19",
+        "@tiptap/react": "^2.0.0-beta.55",
+        "@tiptap/starter-kit": "^2.0.0-beta.89",
         "@types/babel-traverse": "^6.25.5",
         "@types/cors": "^2.8.12",
         "@types/express": "^4.17.13",
@@ -117,7 +106,6 @@
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "react-feather": "^2.0.9",
-        "react-flow-renderer": "^9.6.6",
         "rimraf": "^2.6.3",
         "style-loader": "^0.23.1",
         "terser-webpack-plugin": "^2.3.5",
@@ -131,9 +119,6 @@
         "webpack-dev-server": "^3.3.1"
     },
     "dependencies": {
-        "@tiptap/extension-link": "^2.0.0-beta.19",
-        "@tiptap/react": "^2.0.0-beta.55",
-        "@tiptap/starter-kit": "^2.0.0-beta.89",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "directory-tree": "^2.2.9",

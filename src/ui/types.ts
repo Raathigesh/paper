@@ -1,6 +1,6 @@
 export interface ClientDoc {
     content: string;
     id: string;
-    type: 'doc' | 'mindmap';
+    type: 'doc';
     name: string;
 }
