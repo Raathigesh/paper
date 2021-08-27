@@ -43,6 +43,12 @@ export function DocItem({ isActive, onClick, doc, onRename, onDelete }: Props) {
                             _hover={{
                                 borderColor: 'brand.200',
                             }}
+                            onKeyDown={e => {
+                                if (e.key == 'Enter') {
+                                    setIsEditMode(false);
+                                    onRename(doc.id, docName);
+                                }
+                            }}
                             size="small"
                             value={docName}
                             onChange={e => setDocName(e.target.value)}

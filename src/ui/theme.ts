@@ -49,6 +49,8 @@ export const theme = extendTheme({
             500: '#1C1C1E',
             600: '#f1f0ee',
             700: '#25252e',
+            800: '#ffc107',
+            900: '#e91e63',
         },
     },
 });

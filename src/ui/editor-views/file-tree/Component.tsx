@@ -90,21 +90,23 @@ export default (props: any) => {
         >
             <Flex
                 flexDir="column"
-                border="1px solid brand.300"
+                border="1px solid"
+                borderColor="brand.300"
                 borderRadius="3px"
                 padding="10px"
                 flexGrow={1}
-                backgroundColor="brand.300"
             >
                 <Flex alignItems="center">
                     <Input
                         onChange={e => setPath(e.target.value)}
                         value={props.node.attrs.path}
                         borderColor="brand.300"
-                        size="xs"
+                        color="brand.600"
+                        size="sm"
                         backgroundColor="brand.300"
                         _hover={{ border: '1px solid brand.500' }}
                         borderRadius="4px"
+                        placeholder="Paste a directory path here"
                     />
                     <Tooltip label="Refresh file tree">
                         <Button

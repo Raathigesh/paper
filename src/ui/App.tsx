@@ -50,8 +50,11 @@ function App() {
                 <Flex
                     justifyContent="space-between"
                     alignItems="center"
-                    backgroundColor="brand.100"
+                    backgroundColor="brand.500"
                     padding="3px"
+                    borderBottom="1px solid"
+                    borderBottomColor="brand.300"
+                    color="brand.400"
                 >
                     <Flex marginLeft="15px" fontSize="12px">
                         {activeDoc && activeDoc.name}

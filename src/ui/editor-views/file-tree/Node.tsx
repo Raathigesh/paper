@@ -35,6 +35,8 @@ export function Node({
             )
         ) : null;
     const Icon = type === 'file' ? File : Folder;
+
+    const isActive = selectedEditor?.toLowerCase() === path.toLowerCase();
     return (
         <Flex flexDir="column" marginLeft="20px">
             <Flex
@@ -46,11 +48,8 @@ export function Node({
                 _hover={{
                     backgroundColor: 'brand.700',
                 }}
-                backgroundColor={
-                    selectedEditor?.toLowerCase() === path.toLowerCase()
-                        ? 'brand.700'
-                        : 'none'
-                }
+                backgroundColor={isActive ? 'brand.700' : 'none'}
+                color={isActive ? 'brand.800' : 'none'}
                 onClick={e => {
                     e.stopPropagation();
                     if (type === 'file') {

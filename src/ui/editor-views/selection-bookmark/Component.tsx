@@ -75,7 +75,7 @@ export default (props: any) => {
             <Flex
                 display="inline-flex"
                 backgroundColor="brand.100"
-                color="brand.400"
+                color="brand.800"
                 borderRadius="5px"
                 fontSize="14px"
                 cursor="pointer"
@@ -89,7 +89,7 @@ export default (props: any) => {
                 </Flex>
                 <Flex
                     _hover={{
-                        backgroundColor: 'brand.400',
+                        backgroundColor: 'brand.900',
                         color: 'brand.100',
                     }}
                     padding="6px"
