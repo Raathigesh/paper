@@ -1,10 +1,18 @@
+<img src="docs/assets/PaperBanner.png" />
+
 ## Paper
 
-Paper is a note taking tool for VSCode.
+Paper is a code note taking tool for VSCode with some special features. The main motivation behind Paper is to build a tool that will let you keep directories, files, location info within a file somewhere faster to reach so it's easy to get back to them.
+
+If you are working on a feature and switching between few files, a tool like Paper could will this a lot easier and eliminate the need for having to search for a file among the open tabs or scroll a file over and over looking for that function.
+
+<br />
 
 ### Installing the extension
 
 You can install the [extension](https://marketplace.visualstudio.com/items?itemName=Raathigeshan.paper) from VSCode marketplace.
+
+<br />
 
 ### Guide to using paper
 
