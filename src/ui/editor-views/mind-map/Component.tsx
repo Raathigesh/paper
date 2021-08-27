@@ -161,7 +161,7 @@ export default (props: any) => {
         >
             <Modal isOpen={isInEdit} onClose={() => setIsInEdit(false)}>
                 <ModalOverlay />
-                <ModalContent backgroundColor="#2F2E31">
+                <ModalContent backgroundColor="brand.300">
                     <ModalHeader fontSize="15px" fontWeight={400}>
                         Add range bookmark
                     </ModalHeader>
@@ -181,9 +181,9 @@ export default (props: any) => {
                                 setIsInEdit(false);
                                 setTxtPath('');
                             }}
-                            backgroundColor="#2F2E31"
-                            color="#f1f0ee"
-                            _hover={{ backgroundColor: '#090909' }}
+                            backgroundColor="brand.300"
+                            color="brand.600"
+                            _hover={{ backgroundColor: 'brand.100' }}
                             size="sm"
                             fontWeight={400}
                         >
@@ -197,7 +197,7 @@ export default (props: any) => {
                                 setIsInEdit(false);
                             }}
                             backgroundColor="#5E5CED"
-                            color="#f1f0ee"
+                            color="brand.600"
                             _hover={{ backgroundColor: '#5452f3' }}
                             size="sm"
                             fontWeight={400}
@@ -209,11 +209,11 @@ export default (props: any) => {
             </Modal>
             <Flex
                 flexDir="column"
-                border="1px solid #2F2E31"
+                border="1px solid brand.300"
                 borderRadius="3px"
                 padding="10px"
                 flexGrow={1}
-                backgroundColor="#2F2E31"
+                backgroundColor="brand.300"
                 height="500px"
             >
                 <ReactFlow

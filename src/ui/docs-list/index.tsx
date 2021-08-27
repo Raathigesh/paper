@@ -99,13 +99,13 @@ export default function CreateDoc({
         <Popover
             colorScheme="blackAlpha"
             onOpen={() => getDocs()}
-            arrowShadowColor="#2F2E31"
+            arrowShadowColor="brand.300"
         >
             <PopoverTrigger>
                 <Flex
                     size="sm"
-                    color="#f1f0ee"
-                    _hover={{ color: '#03a9f4' }}
+                    color="brand.600"
+                    _hover={{ color: 'brand.400' }}
                     cursor="pointer"
                     padding="3px"
                 >
@@ -114,10 +114,10 @@ export default function CreateDoc({
             </PopoverTrigger>
             <Portal>
                 <PopoverContent
-                    borderColor="#2F2E31"
+                    borderColor="brand.300"
                     width="400px"
                     zIndex={9999999999}
-                    backgroundColor="#2F2E31"
+                    backgroundColor="brand.300"
                     colorScheme="blackAlpha"
                     boxShadow="none"
                     _focus={{
@@ -125,11 +125,11 @@ export default function CreateDoc({
                     }}
                 >
                     <PopoverArrow
-                        backgroundColor="#2F2E31"
-                        borderColor="#090909"
+                        backgroundColor="brand.300"
+                        borderColor="brand.100"
                         boxShadow="none"
                     />
-                    <PopoverHeader borderColor="#090909">Docs</PopoverHeader>
+                    <PopoverHeader borderColor="brand.100">Docs</PopoverHeader>
                     <PopoverCloseButton />
                     <PopoverBody>
                         {docs.map(item => (
@@ -146,7 +146,7 @@ export default function CreateDoc({
                             />
                         ))}
                     </PopoverBody>
-                    <PopoverFooter borderColor="#090909">
+                    <PopoverFooter borderColor="brand.100">
                         <Flex>
                             <Input
                                 size="small"
@@ -155,30 +155,37 @@ export default function CreateDoc({
                                 variant="outline"
                                 placeholder="Name your doc"
                                 value={docName}
-                                borderColor="#090909"
+                                borderColor="brand.100"
                                 _hover={{
-                                    borderColor: '#272727',
+                                    borderColor: 'brand.200',
                                 }}
                                 _focus={{
                                     boxShadow: 'none',
                                 }}
                                 onChange={e => setDocName(e.target.value)}
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter') {
+                                        createDoc(docName);
+                                        setDocName('');
+                                    }
+                                }}
                             />
                             <Button
                                 marginLeft="10px"
                                 variant="outline"
-                                backgroundColor="#2F2E31"
-                                color="#f1f0ee"
-                                borderColor="#090909"
+                                backgroundColor="brand.300"
+                                color="brand.600"
+                                borderColor="brand.100"
                                 _hover={{
-                                    borderColor: '#090909',
-                                    backgroundColor: '#272727',
+                                    borderColor: 'brand.100',
+                                    backgroundColor: 'brand.200',
                                 }}
                                 _focus={{
                                     boxShadow: 'none',
                                 }}
                                 onClick={() => {
                                     createDoc(docName);
+                                    setDocName('');
                                 }}
                                 isDisabled={docName.trim() === ''}
                             >

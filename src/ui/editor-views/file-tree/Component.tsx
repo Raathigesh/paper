@@ -90,29 +90,29 @@ export default (props: any) => {
         >
             <Flex
                 flexDir="column"
-                border="1px solid #2F2E31"
+                border="1px solid brand.300"
                 borderRadius="3px"
                 padding="10px"
                 flexGrow={1}
-                backgroundColor="#2F2E31"
+                backgroundColor="brand.300"
             >
                 <Flex alignItems="center">
                     <Input
                         onChange={e => setPath(e.target.value)}
                         value={props.node.attrs.path}
-                        borderColor="#2F2E31"
+                        borderColor="brand.300"
                         size="xs"
-                        backgroundColor="#2F2E31"
-                        _hover={{ border: '1px solid #1C1C1E' }}
+                        backgroundColor="brand.300"
+                        _hover={{ border: '1px solid brand.500' }}
                         borderRadius="4px"
                     />
                     <Tooltip label="Refresh file tree">
                         <Button
                             colorScheme="blue"
                             onClick={() => getTree(props.node.attrs.path)}
-                            backgroundColor="#2F2E31"
-                            color="#f1f0ee"
-                            _hover={{ backgroundColor: '#1C1C1E' }}
+                            backgroundColor="brand.300"
+                            color="brand.600"
+                            _hover={{ backgroundColor: 'brand.500' }}
                             size="sm"
                             fontWeight={400}
                             marginLeft="10px"
@@ -124,9 +124,9 @@ export default (props: any) => {
                         <Button
                             colorScheme="blue"
                             onClick={() => props.deleteNode()}
-                            backgroundColor="#2F2E31"
-                            color="#f1f0ee"
-                            _hover={{ backgroundColor: '#1C1C1E' }}
+                            backgroundColor="brand.300"
+                            color="brand.600"
+                            _hover={{ backgroundColor: 'brand.500' }}
                             size="sm"
                             fontWeight={400}
                         >

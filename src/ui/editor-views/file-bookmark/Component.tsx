@@ -43,12 +43,12 @@ export default (props: any) => {
         <NodeViewWrapper className="bookmarkRenderer">
             <Flex
                 display="inline-flex"
-                backgroundColor="#090909"
-                color="#03a9f4"
+                backgroundColor="brand.100"
+                color="brand.400"
                 borderRadius="4px"
                 fontSize="14px"
                 cursor="pointer"
-                _hover={{ backgroundColor: '#272727' }}
+                _hover={{ backgroundColor: 'brand.200' }}
                 minHeight="25px"
                 alignItems="center"
                 onClick={() => openFile(props.node.attrs.path)}
@@ -57,7 +57,10 @@ export default (props: any) => {
                     {props.node.attrs.path}
                 </Flex>
                 <Flex
-                    _hover={{ backgroundColor: '#03a9f4', color: '#090909' }}
+                    _hover={{
+                        backgroundColor: 'brand.400',
+                        color: 'brand.100',
+                    }}
                     padding="7px"
                     borderRadius="0px 4px 4px 0px"
                     onClick={e => {

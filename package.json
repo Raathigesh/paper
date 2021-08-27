@@ -84,7 +84,6 @@
         "@babel/preset-typescript": "^7.7.2",
         "@chakra-ui/react": "^1.6.5",
         "@devtools-ds/dom-inspector": "^1.1.2",
-        "@devtools-ds/themes": "^1.1.2",
         "@emotion/core": "^10.0.22",
         "@emotion/react": "11",
         "@emotion/styled": "11",

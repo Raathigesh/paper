@@ -12,9 +12,9 @@ export function EditorFloatingButton({ onClick, tooltip, icon }: Props) {
         <Tooltip label={tooltip}>
             <Button
                 size="xs"
-                backgroundColor="#2F2E31"
-                color="#f1f0ee"
-                _hover={{ backgroundColor: '#090909' }}
+                backgroundColor="brand.300"
+                color="brand.600"
+                _hover={{ backgroundColor: 'brand.100' }}
                 onClick={onClick}
             >
                 {icon}
