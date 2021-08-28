@@ -7,6 +7,7 @@ import * as dirTree from 'directory-tree';
 import { initializeStaticRoutes } from './static-files';
 import { isAbsolute, join } from 'path';
 import { DocsManager } from './DocsManager';
+import { resolvePath } from './utils';
 
 export async function startApiServer(
     port: number,
@@ -21,9 +22,7 @@ export async function startApiServer(
 
     app.post('/open-file', (req, res) => {
         const path = req.body.filePath;
-        const fullPath = isAbsolute(path)
-            ? path
-            : join(vscode.workspace.rootPath || '', path);
+        const fullPath = resolvePath(vscode.workspace.rootPath || '', path);
 
         let selection = undefined;
         if (req.body.selection) {
