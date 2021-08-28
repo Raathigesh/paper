@@ -5,7 +5,7 @@ import * as cors from 'cors';
 import * as dirTree from 'directory-tree';
 
 import { initializeStaticRoutes } from './static-files';
-import { isAbsolute, join } from 'path';
+import { isAbsolute, join, relative } from 'path';
 import { DocsManager } from './DocsManager';
 import { resolvePath } from './utils';
 
@@ -99,7 +99,11 @@ export async function startApiServer(
     });
 
     app.post('/tree', (req, res) => {
-        const tree = dirTree(req.body.directoryPath);
+        const fullPath = resolvePath(
+            vscode.workspace.rootPath || '',
+            req.body.directoryPath
+        );
+        const tree = dirTree(fullPath);
         res.json(tree);
     });
 
@@ -128,7 +132,10 @@ export async function startApiServer(
     // View specific endpoints
     app.get('/activeFilePath', (req, res) => {
         res.json({
-            activeFilePath: vscode.window.activeTextEditor?.document.fileName,
+            activeFilePath: relative(
+                vscode.workspace.rootPath || '',
+                vscode.window.activeTextEditor?.document.fileName || ''
+            ),
         });
     });
 
