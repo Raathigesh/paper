@@ -1,4 +1,4 @@
-<img src="docs/assets/PaperBanner.png" />
+<img src="https://raw.githubusercontent.com/Raathigesh/paper/main/docs/assets/PaperBanner.png" />
 
 <br />
 <br />
@@ -26,7 +26,7 @@ You can install the [extension](https://marketplace.visualstudio.com/items?itemN
 
 #### Bookmark active file
 
-<img src="docs/assets/Paper File bookmark.gif" />
+<img src="https://raw.githubusercontent.com/Raathigesh/paper/main/docs/assets/Paper File bookmark.gif" />
 
 Click the file icon in the floating menu to create a bookmark for the active file.
 
@@ -36,17 +36,17 @@ This is helpful if you want to bookmark a file that you frequently visit while i
 
 #### Bookmark selection
 
-<img src="docs/assets/Paper Selection bookmark.gif" />
+<img src="https://raw.githubusercontent.com/Raathigesh/paper/main/docs/assets/Paper Selection bookmark.gif" />
 
 Select text in a file and click the the pointer icon in the floating menu to create a bookmark to the selection.
 
-Using this feature you can bookmark any number of locations in your codebase you jump visit often.
+Using this feature you can bookmark any number of locations in your codebase you visit often.
 
 <br />
 
 #### File tree
 
-<img src="docs/assets/Paper Filetree.gif" />
+<img src="https://raw.githubusercontent.com/Raathigesh/paper/main/docs/assets/Paper Filetree.gif" />
 
 A file tree widget shows you the files under a particular path as a tree view.
 
