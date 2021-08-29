@@ -3,25 +3,32 @@
 <br />
 <br />
 
-Paper is a note taking tool for VSCode. The motivation behind Paper is to build a tool that will let you keep directories, files, location info within a file somewhere faster to reach so it's easy to get back to them.
-
-If you are working on a feature and switching between few files, a tool like Paper could will this a lot easier and eliminate the need for having to search for a file among the open tabs or scroll a file over and over looking for that function.
+Paper is a note taking tool for VSCode. The motivation behind Paper is to create a tool that will let developers keep frequently accessed files and locations within files (functions, classes and etc) bookmarked for easy access.
 
 <br />
 
-### Installing the extension
+### Install the extension
 
 You can install the [extension](https://marketplace.visualstudio.com/items?itemName=Raathigeshan.paper) from VSCode marketplace.
 
 <br />
 
-### Features and their use cases
+### Shortcuts
+
+-   `# <space>` - Creates a H1 heading
+-   `## <space>` - Creates a H2 heading
+-   `### <space>` - Creates a H3 heading
+-   `- <space>` - Creates a list
+
+<br />
+
+### Features
 
 #### Bookmark active file
 
 <img src="docs/assets/Paper File bookmark.gif" />
 
-Click on the file icon in the floating menu to create a bookmark for the active file.
+Click the file icon in the floating menu to create a bookmark for the active file.
 
 This is helpful if you want to bookmark a file that you frequently visit while implementing a feature.
 
@@ -31,9 +38,9 @@ This is helpful if you want to bookmark a file that you frequently visit while i
 
 <img src="docs/assets/Paper Selection bookmark.gif" />
 
-Select text in a file and click on the pointer icon in the floating menu to create a bookmark to the selection.
+Select text in a file and click the the pointer icon in the floating menu to create a bookmark to the selection.
 
-Using this feature you could bookmark any number of locations in your codebase you jump around often. This could eliminate a lot of scrolling and searching for the tab among all the open tabs.
+Using this feature you can bookmark any number of locations in your codebase you jump visit often.
 
 <br />
 
@@ -43,7 +50,7 @@ Using this feature you could bookmark any number of locations in your codebase y
 
 A file tree widget shows you the files under a particular path as a tree view.
 
-This helps to keep a particular directory in-sight if don't want to keep expanding it in VSCode's tree view.
+This helps to keep a particular directory in-sight if don't want to scroll through in VSCode's tree view.
 
 <br />
 
